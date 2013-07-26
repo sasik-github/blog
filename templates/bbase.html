@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Blog{% endblock %}</title>
+    {% block extrahead %}{% endblock %}
+    <!--<link rel="stylesheet" href="{{ STATIC_URL }}/css/blog.css" type="text/css" media="screen" charset="utf-8" /> -->
+
+    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="container">
+    <div class="sidebar"> {% block sidebar %}{% endblock %} </div>
+    <div class="navbar-wrapper">
+    <div class="container">
+
+        <!-- MENU -->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+          <div class="navbar-inner">
+            <div class="container">
+              <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="brand" href="{% url 'main' %}">Sasik Blog</a>
+              <div class="nav-collapse collapse">
+                {% block nav-global %}
+                <ul class="nav">
+                  <li class="active"><a href="{% url 'main' %}">Home</a></li>
+                  {% if user.is_staff %}
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle = "dropdown">Admin<b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="{% url 'admin:index' %}">Личный кабинет</a></li>
+                        <li><a href="{% url 'admin:blog_post_add' %}">Добавить пост</a></li>
+                        <li><a href=""></a></li>
+                      </ul>
+                    </li>
+                    <li class="dropdown"></li>
+                    <li><a href="#contact">Contact</a></li>
+                  {% endif %} 
+                </ul>
+                {% endblock %}
+              </div><!--/.nav-collapse -->
+            </div>
+          </div>
+        </div>
+        </div>
+        
+
+        <!-- CONTENT -->
+
+        <div сlass="container">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+
+
+    <script src="{{ STATIC_URL }}bootstrap/js/jquery.min.js"></script>
+    
+    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+    <script>
+      !function ($) {
+        $(function(){
+          // carousel demo
+          $('#myCarousel').carousel()
+        })
+      }(window.jQuery)
+    </script>
+    </div>
+</body>
+</html>
+

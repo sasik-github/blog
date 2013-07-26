@@ -1,0 +1,34 @@
+{% extends "bbase.html" %}
+{% block content %}
+    <div class="main">
+        <div class="hero-unit">
+            <h2>{{ post.title }}</h2>
+            <ul>
+                <div class="time">{{ post.created }}</div>
+                <p>{{ post.body|linebreaks }}</p>
+            </ul>
+        </div>
+        <hr />
+
+        {% for comment in comment_list %}
+                <hr class="featurette-divider">
+                <div class="featurette">
+                    <ul>
+                        <h4>{{ comment.author }}</h4>
+                        <p>{{ comment.body|linebreaks }}</p>
+                    </ul>
+                </div>
+                <hr class="featurette-divider">
+        {% endfor %}
+
+
+        <div id="reply">
+        <form action="" method="POST"> {% csrf_token %}
+            <table>
+                {{ modelform.as_table }}
+            </table>
+            <input type="submit" value="Submit" />
+        </form>
+        </div>
+    </div>
+{% endblock %}
